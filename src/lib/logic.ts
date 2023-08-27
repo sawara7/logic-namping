@@ -20,6 +20,10 @@ export interface LogicNampingSettings {
     targetSide: OrderSide[]
     badgetRate: number
     leverage: number
+    buyOpenSizeBias: number
+    sellOpenSizeBias: number
+    buyCloseSizeBias: number
+    sellCloseSizeBias: number
 }
 
 export interface PositionInfo {
@@ -57,7 +61,11 @@ export class LogicNampingClass {
     }
 
     getPositionSize(side: OrderSide, index: number): number {
-        return floor(this.singleBadget/this._positions[side][index].openPrice, this._settings.sizePrecision)
+        return floor(this.singleBadget/this._positions[side][index].openPrice * (side === "buy"? this._settings.buyOpenSizeBias: this._settings.sellOpenSizeBias), this._settings.sizePrecision)
+    }
+
+    getClosePositionSize(side: OrderSide, openSize: number): number {
+        return floor(openSize * (side === "buy"? this._settings.buyCloseSizeBias: this._settings.sellCloseSizeBias), this._settings.sizePrecision)
     }
 
     getPositionNum(side: OrderSide): number {

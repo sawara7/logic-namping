@@ -29,7 +29,10 @@ class LogicNampingClass {
         return this._positions[side][index];
     }
     getPositionSize(side, index) {
-        return (0, my_utils_1.floor)(this.singleBadget / this._positions[side][index].openPrice, this._settings.sizePrecision);
+        return (0, my_utils_1.floor)(this.singleBadget / this._positions[side][index].openPrice * (side === "buy" ? this._settings.buyOpenSizeBias : this._settings.sellOpenSizeBias), this._settings.sizePrecision);
+    }
+    getClosePositionSize(side, openSize) {
+        return (0, my_utils_1.floor)(openSize * (side === "buy" ? this._settings.buyCloseSizeBias : this._settings.sellCloseSizeBias), this._settings.sizePrecision);
     }
     getPositionNum(side) {
         return this._positions[side].length;

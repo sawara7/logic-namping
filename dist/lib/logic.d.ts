@@ -11,6 +11,10 @@ export interface LogicNampingSettings {
     targetSide: OrderSide[];
     badgetRate: number;
     leverage: number;
+    buyOpenSizeBias: number;
+    sellOpenSizeBias: number;
+    buyCloseSizeBias: number;
+    sellCloseSizeBias: number;
 }
 export interface PositionInfo {
     side: OrderSide;
@@ -25,6 +29,7 @@ export declare class LogicNampingClass {
     updateBadget(value: number): void;
     getPositionInfo(side: OrderSide, index: number): PositionInfo;
     getPositionSize(side: OrderSide, index: number): number;
+    getClosePositionSize(side: OrderSide, openSize: number): number;
     getPositionNum(side: OrderSide): number;
     get singleBadget(): number;
     get targetSides(): OrderSide[];
