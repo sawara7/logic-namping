@@ -23,7 +23,7 @@
   },
   "bundleDependencies": [],
   "dependencies": {
-    "my-utils": "github:sawara7/my-utils",
-    "trade-utils": "github:sawara7/trade-utils"
+    "utils-general": "github:sawara7/utils-general",
+    "utils-trade": "github:sawara7/utils-trade"
   }
 }

@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LogicNampingClass = void 0;
-const trade_utils_1 = require("trade-utils");
-const my_utils_1 = require("my-utils");
+const utils_trade_1 = require("utils-trade");
+const utils_general_1 = require("utils-general");
 class LogicNampingClass {
     constructor(_settings) {
         this._settings = _settings;
         this._badget = 0;
-        this._positions = (0, trade_utils_1.getListByOrderSide)((s) => { return []; });
+        this._positions = (0, utils_trade_1.getListByOrderSide)((s) => { return []; });
         const posNum = Math.floor(this._settings.positionNum);
         const range = this._settings.maxPrice - this._settings.minPrice;
         for (const s of this._settings.targetSide) {
@@ -16,8 +16,8 @@ class LogicNampingClass {
                 const closePrice = openPrice * (1 + this._settings.profitRate * (s === "buy" ? 1 : -1));
                 this._positions[s].push({
                     side: s,
-                    openPrice: (0, my_utils_1.floor)(openPrice, this._settings.pricePrecision),
-                    closePrice: (0, my_utils_1.floor)(closePrice, this._settings.pricePrecision)
+                    openPrice: (0, utils_general_1.floor)(openPrice, this._settings.pricePrecision),
+                    closePrice: (0, utils_general_1.floor)(closePrice, this._settings.pricePrecision)
                 });
             }
         }
@@ -29,10 +29,10 @@ class LogicNampingClass {
         return this._positions[side][index];
     }
     getPositionSize(side, index) {
-        return (0, my_utils_1.floor)(this.singleBadget / this._positions[side][index].openPrice * (side === "buy" ? this._settings.buyOpenSizeBias : this._settings.sellOpenSizeBias), this._settings.sizePrecision);
+        return (0, utils_general_1.floor)(this.singleBadget / this._positions[side][index].openPrice * (side === "buy" ? this._settings.buyOpenSizeBias : this._settings.sellOpenSizeBias), this._settings.sizePrecision);
     }
     getClosePositionSize(side, openSize) {
-        return (0, my_utils_1.floor)(openSize * (side === "buy" ? this._settings.buyCloseSizeBias : this._settings.sellCloseSizeBias), this._settings.sizePrecision);
+        return (0, utils_general_1.floor)(openSize * (side === "buy" ? this._settings.buyCloseSizeBias : this._settings.sellCloseSizeBias), this._settings.sizePrecision);
     }
     getPositionNum(side) {
         return this._positions[side].length;

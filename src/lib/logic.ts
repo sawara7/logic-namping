@@ -2,35 +2,16 @@ import {
     ListByOrderSide,
     OrderSide,
     getListByOrderSide
-} from "trade-utils"
+} from "utils-trade"
 
 import {
     floor
-} from "my-utils"
+} from "utils-general"
 
-export interface LogicNampingSettings {
-    pair: string
-    minPrice: number
-    maxPrice: number
-    positionNum: number
-    profitRate: number
-    pricePrecision: number
-    sizePrecision: number
-    minSize: number
-    targetSide: OrderSide[]
-    badgetRate: number
-    leverage: number
-    buyOpenSizeBias: number
-    sellOpenSizeBias: number
-    buyCloseSizeBias: number
-    sellCloseSizeBias: number
-}
-
-export interface PositionInfo {
-    side: OrderSide
-    openPrice: number
-    closePrice: number
-}
+import {
+    LogicNampingSettings,
+    PositionInfo
+} from "./params"
 
 export class LogicNampingClass {
     private _badget: number = 0
