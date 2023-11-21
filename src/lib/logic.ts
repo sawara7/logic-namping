@@ -23,11 +23,13 @@ export class LogicNampingClass {
         for (const s of this._settings.targetSide) {
             for (let i = 0; i < posNum; i++) {
                 const openPrice = this._settings.minPrice + range * (1 - Math.log2(2-i/posNum))
-                const closePrice = openPrice * (1+this._settings.profitRate * (s === "buy"? 1: -1)) 
+                const closePrice = openPrice * (1+this._settings.profitRate * (s === "buy"? 1: -1))
+                const losscutPrice = openPrice * (1+this._settings.losscutRate * (s === "buy"? -1: 1)) 
                 this._positions[s].push({
                     side: s,
                     openPrice: floor(openPrice, this._settings.pricePrecision),
-                    closePrice: floor(closePrice, this._settings.pricePrecision)
+                    closePrice: floor(closePrice, this._settings.pricePrecision),
+                    losscutPrice: floor(losscutPrice, this._settings.pricePrecision)
                 })
             }
         }

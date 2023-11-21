@@ -8,6 +8,7 @@ export interface LogicNampingSettings {
     maxPrice: number
     positionNum: number
     profitRate: number
+    losscutRate: number
     pricePrecision: number
     sizePrecision: number
     minSize: number
@@ -24,4 +25,5 @@ export interface PositionInfo {
     side: OrderSide
     openPrice: number
     closePrice: number
+    losscutPrice: number
 }
