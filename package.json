@@ -8,18 +8,15 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "install-rimraf": "npm install --save-dev rimraf",
-    "cleanup": "rimraf package-lock.json && rimraf dist && rimraf node_modules",
-    "build": "npm run install-rimraf && npm run cleanup && npm install && tsc",
-    "tsc": "tsc",
+    "build": "ncu -u && npm install && npm update && tsc",
+    "commit": "git commit -am 'commit' && npm version patch && git push",
     "test": "jest"
   },
   "author": "sawara",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^14.14.34",
-    "rimraf": "^4.4.1",
-    "typescript": "^4.3.5"
+    "@types/node": "^20.14.11",
+    "typescript": "^5.5.3"
   },
   "bundleDependencies": [],
   "dependencies": {
